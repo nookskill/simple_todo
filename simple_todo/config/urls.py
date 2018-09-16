@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import JsonResponse
-from django.urls import path
+from django.urls import path, include
+
 
 def return_success(request) -> JsonResponse:
     return JsonResponse({'status': 'System is still running...'})
 
 urlpatterns = [
+    path('', return_success),
     path('admin/', admin.site.urls),
-    path('', return_success)
+    path('api/', include('simple_todo.config.api_urls')),
 ]

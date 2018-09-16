@@ -12,7 +12,7 @@ class Task(models.Model):
 
     subject = models.CharField(max_length=255, verbose_name='Subject')
     content = models.TextField(blank=True, null=True, verbose_name='Content')
-    status = models.CharField(default=PENDING, choices=TASK_STATUS_CHOICES, verbose_name='Status')
+    status = models.CharField(max_length=255, default=PENDING, choices=TASK_STATUS_CHOICES, verbose_name='Status')
 
     class Meta:
         verbose_name = 'Task'
