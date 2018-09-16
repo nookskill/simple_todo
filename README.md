@@ -1,9 +1,26 @@
 # Simple todo
 
-Simple todo task list is only API not include interface. Create with django-rest-framework.
+Simple todo task list is only API not include user interface. Create with django-rest-framework.
 
 ## Installation
+- Build docker image
 
+```$ docker-compose build```
+
+- Start  project with docker-compose
+
+```$ docker-compose up```
+
+- First run use this command for migrate database
+
+ ```$ docker-compose exec django python manage.py migrate```
+ 
+
+Check status [http://localhost:8000]() 
+
+Route view of API: [http://localhost:8000/api]()
+
+API Document: [http://localhost:8000/docs/]()
 
 ## License
  

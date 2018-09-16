@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
 
+schema_view = get_swagger_view(title='Todolist API')
 
 def return_success(request) -> JsonResponse:
     return JsonResponse({'status': 'System is still running...'})
@@ -24,5 +26,6 @@ def return_success(request) -> JsonResponse:
 urlpatterns = [
     path('', return_success),
     path('admin/', admin.site.urls),
-    path('api/', include('simple_todo.config.api_urls')),
+    path('api/', include(('simple_todo.config.api_urls', 'api_urls'), namespace='api')),
+    path('docs/', schema_view)
 ]
