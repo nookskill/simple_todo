@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import environ
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env = environ.Env()
+ROOT_DIR = environ.Path(__file__) - 4
+BASE_DIR = ROOT_DIR.path('simple_todo')
+APPS_DIR = BASE_DIR.path('apps')
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +28,7 @@ SECRET_KEY = '!b@#4q7u5=inbo=6_^0#505r9!77et9$%643a*ihr+nv$6j$w$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_extensions',
+    'rest_framework',
+    'django_filters',
+    'rest_framework_swagger',
+
+    'simple_todo.apps.tasks',
 ]
 
 MIDDLEWARE = [
@@ -72,13 +82,11 @@ WSGI_APPLICATION = 'simple_todo.config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+DATABASE_URL = 'postgres://postgres:postgres@postgres:5432/simple_todo'
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db("DATABASE_URL", default=DATABASE_URL)
 }
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Password validation
@@ -118,3 +126,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Django Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 40,
+    'COERCE_DECIMAL_TO_STRING': False
+}

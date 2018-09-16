@@ -43,3 +43,4 @@ requests
 # debug tool
 ipdb
 
+django-rest-swagger

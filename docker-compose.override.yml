@@ -3,6 +3,5 @@ version: '3'
 services:
   django:
     volumes:
-      - ./eneos:/simple_todo/eneos
-      - ./media:/simple_todo/media
+      - ./simple_todo:/code/simple_todo
     command: "python manage.py runserver 0.0.0.0:8000"
