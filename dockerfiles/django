@@ -1,0 +1,20 @@
+FROM python:3.6
+ENV PYTHONUNBUFFERED 1
+
+# Install requirement to compile messages
+RUN apt-get update && apt-get install -y gettext libgettextpo-dev
+
+# Creating working directory
+RUN mkdir /code
+WORKDIR /code
+
+# Copying requirements
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copying source
+COPY manage.py .
+COPY simple_todo ./simple_todo
+
+# Copy static files
+COPY static_files ./static_files

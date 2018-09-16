@@ -1,0 +1,45 @@
+# Core
+Django
+django-environ
+django-filter
+
+# Django REST framework and JSON Web Token Authentication
+djangorestframework
+coreapi
+pygments
+markdown
+
+# Debugging only on Local environment
+django-debug-toolbar
+django-extensions
+
+# postgres adapter
+psycopg2-binary
+
+# Production running
+gunicorn
+gevent
+
+# Header for API
+django-cors-headers
+
+# Testing
+model-mommy
+django-test-without-migrations
+jsonschema
+responses
+
+Collectfast
+
+# Timezone
+pytz
+
+freezegun
+mock
+
+# networking
+requests
+
+# debug tool
+ipdb
+
