@@ -12,7 +12,7 @@ services:
       - DJANGO_ALLOWED_HOSTS
       - DATABASE_URL
     volumes:
-      - ./static_files:/simple_todo/static_files
+      - ./static_files:/code/static_files
     tty: true
     stdin_open: true
 
